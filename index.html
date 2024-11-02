@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses App</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <h1 class="header">Учет расходов</h1>
+            <input 
+            class="js-input input"
+            type="number"
+            placeholder="Введите сумму">
+            <span class="fixed-label">руб.</span>
+            <button class="js-add-button add-button">Добавить</button>
+
+            <div class="row">
+                <div class="col">
+                    <p><strong>Лимит: </strong><span class="js-limit limit"></span> руб.</p>
+
+                    <p><strong>Сумма: </strong><span class="js-sum sum"></span> руб.</p>
+
+                    <p><strong>Статус: </strong><span class="js-status status"></span></p>
+                </div>
+
+                <div class="col">
+                    <p><strong>История:</strong></p>
+                    <div class="js-history"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+</html>
