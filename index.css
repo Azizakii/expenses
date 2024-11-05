@@ -26,6 +26,24 @@ table {
     margin-top: 67px;
 }
 
+.expenses {
+    display: flex;
+    column-gap: 60px;
+    margin-bottom: 60px;
+}
+
+.expenses-input {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.categorySelect {
+    width: 484px;
+    height: 52px;
+    font-size: 32px;
+}
+
 .row {
     display: flex;
     gap: 200px;
@@ -38,45 +56,55 @@ table {
 }
 
 .input {
+    box-sizing: border-box;
     width: 484px;
     height: 52px;
     font-size: 32px;
-    margin-bottom: 50px;
+}
+
+.items {
+    position: relative;
 }
 
 .fixed-label {
     position: absolute;
-    top: 155px;
-    left: 695px;
+    top: 5px;
+    right: 10px;
 }
 
 .add-button {
+    cursor: pointer;
     width: 370px;
     height: 58px;
     font-size: 32px;
     color: white;
     background-color: rgb(0, 148, 255);
-    border: 0;
+    border: none;
+    border-radius: 5px;
 }
 
 .col {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 400px;
+    height: 200px;
 }
 
 .limit {
     font-weight: 400;
 }
 
-.sum {
-    margin-bottom: 35px;
+.changeLimitBtn {
+    margin-left: 15px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
 }
 
-.history-wrap {
-
+.history {
+    height: 120px;
 }
-
 
 .status {
     color: green;
@@ -89,4 +117,16 @@ table {
 
 .history-items {
     margin-left: 35px;
+}
+
+.reset-buton {
+    cursor: pointer;
+    width: 480px;
+    height: 58px;
+    font-size: 32px;
+    background-color: rgb(255, 0, 0);
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin-top: 50px;
 }
