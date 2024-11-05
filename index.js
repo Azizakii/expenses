@@ -4,6 +4,7 @@ const STATUS_OUT_OF_LIMIT = 'все плохо';
 const STATUS_OUT_OF_LIMIT_CLASSNAME = 'status_red';
 const STORAGE_LABEL_LIMIT = 'limit';
 const STORAGE_LABEL_EXPENSES = 'expenses';
+const STORAGE_LABEL_STATUS = 'status';
 
 const inputNode = document.querySelector('.js-input');
 const buttonNode = document .querySelector('.js-add-button');
@@ -16,6 +17,8 @@ const categorySelect = document.querySelector('.js-categorySelect');
 const changeLimitButton = document.querySelector('.js-changeLimitButton')
 
 let limit = 10000;
+let expenses = [];
+
 
 function initLimit() {
     const limitFromStorage = parseInt(localStorage.getItem(STORAGE_LABEL_LIMIT))
@@ -28,14 +31,19 @@ function initLimit() {
 
 initLimit();
 
-const expensesFromStorage = localStorage.getItem(STORAGE_LABEL_EXPENSES);
-const expensesFromUser = JSON.parse(expensesFromStorage)
-let expenses = [];
-
-if(Array.isArray(expensesFromUser)) {
-    expenses = expensesFromUser;
+function initExpenses() {
+    const expensesFromStorage = localStorage.getItem(STORAGE_LABEL_EXPENSES);
+    const expensesFromUser = JSON.parse(expensesFromStorage);
+    if (Array.isArray(expensesFromUser)) {
+        expenses = expensesFromUser;
+    }
 }
+
+
+
+initExpenses();
 render(expenses);
+renderStatus(calculateExpenses(expenses))
 
 init(expenses);
 
@@ -85,8 +93,8 @@ changeLimitButton.addEventListener('click', function() {
 })
 
 function init(expenses) {
+    initStatus();
     limitNode.innerText = limit;
-    statusNode.innerText = STATUS_IN_LIMIT;
     sumNode.innerText = calculateExpenses(expenses);
 }
 
@@ -156,10 +164,23 @@ function renderSum(sum) {
 function renderStatus(sum) {
     if (sum <= limit) {
         statusNode.innerText = STATUS_IN_LIMIT;
-        statusNode.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME)
+        statusNode.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
+        localStorage.setItem(STORAGE_LABEL_STATUS, STATUS_IN_LIMIT);
     } else {
         statusNode.innerText = `${STATUS_OUT_OF_LIMIT} (${limit - sum} руб.)`;
-        statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME)
+        statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
+        localStorage.setItem(STORAGE_LABEL_STATUS, STATUS_OUT_OF_LIMIT);
+    }
+}
+
+function initStatus() {
+    const savedStatus = localStorage.getItem(STORAGE_LABEL_STATUS);
+    if (savedStatus === STATUS_OUT_OF_LIMIT) {
+        statusNode.innerText = `${STATUS_OUT_OF_LIMIT} (${limit - calculateExpenses(expenses)} руб.)`;
+        statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
+    } else {
+        statusNode.innerText = STATUS_IN_LIMIT;
+        statusNode.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
     }
 }
 
